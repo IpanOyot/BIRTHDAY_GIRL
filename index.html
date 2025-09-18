@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy Birthday Islahh!</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: #c8a2c8; /* Lilac background */
+      color: white;
+      text-align: center;
+      overflow-x: hidden;
+      overflow-y: hidden;
+    }
+
+    /* --- ENVELOPE SCREEN --- */
+    .envelope-screen {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      flex-direction: column;
+      background: #c8a2c8;
+      position: relative;
+      z-index: 2;
+    }
+
+    .envelope-screen img {
+      width: 200px;
+      cursor: pointer;
+      transition: transform 0.3s;
+    }
+
+    .envelope-screen img:hover {
+      transform: scale(1.1);
+    }
+
+    /* COUNTDOWN BESAR */
+    .loading {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 80px;
+      font-weight: bold;
+      color: #fff;
+      z-index: 9999;
+      animation: pop 1s ease-in-out infinite;
+    }
+
+    @keyframes pop {
+      0% { transform: translate(-50%, -50%) scale(0.5); opacity: 0.3; }
+      50% { transform: translate(-50%, -50%) scale(1.2); opacity: 1; }
+      100% { transform: translate(-50%, -50%) scale(0.5); opacity: 0.3; }
+    }
+
+    /* --- CARD --- */
+    .card {
+      display: none;
+      background: #800080; /* Purple dalam kotak */
+      margin: 40px auto;
+      padding: 30px;
+      border-radius: 25px;
+      max-width: 700px;
+      box-shadow: 0px 8px 20px rgba(0,0,0,0.2);
+      animation: fadeIn 1s ease-in-out;
+      position: relative;
+      overflow: hidden;
+      z-index: 2;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    h1 { font-size: 2.2em; font-weight: bold; }
+    p { font-size: 1.1em; line-height: 1.6; }
+
+    .icons img {
+      width: 100px;
+      height: 100px;
+      animation: bounce 2s infinite;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-15px); }
+    }
+
+    .buttons { margin-top: 20px; }
+
+    .btn {
+      background: white;
+      color: #ff3e9e;
+      font-weight: bold;
+      border: none;
+      padding: 10px 15px;
+      margin: 5px;
+      border-radius: 25px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .btn:hover { background: #ffd6ef; }
+
+    .whatsapp {
+      text-decoration: none;
+      background: #25d366;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 25px;
+      font-weight: bold;
+      display: inline-block;
+      margin-top: 15px;
+    }
+
+    audio { margin-top: 20px; }
+
+    /* --- MULTI PAGE --- */
+    .page {
+      opacity: 0;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      transition: opacity 0.8s ease;
+      pointer-events: none;
+    }
+
+    .page.active {
+      opacity: 1;
+      position: relative;
+      pointer-events: auto;
+    }
+
+    .nav-buttons { margin-top: 20px; }
+
+    /* --- FLOWER ANIMATION --- */
+    .flowers {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .flower {
+      position: absolute;
+      top: -10%;
+      font-size: 24px;
+      color: #c65ecf;
+      animation: fall linear infinite;
+    }
+
+    @keyframes fall {
+      0% { transform: translateY(-10%) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+    }
+
+    /* --- FLOWER ANIMATION LUAR KOTAK --- */
+    .flowers-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .flower-bg {
+      position: absolute;
+      top: -10%;
+      font-size: 28px;
+      color: #ffffff;
+      animation: fall linear infinite;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Background Flowers (LUAR KOTAK) -->
+  <div class="flowers-bg" id="flowersBg"></div>
+
+  <!-- Envelope screen -->
+  <div class="envelope-screen" id="envelopeScreen">
+    <img src="assets/images/envelope.png" alt="Envelope" id="envelope">
+    <div class="loading" id="loading">⏳ 3</div>
+  </div>
+
+  <!-- Birthday card -->
+  <div class="card" id="card">
+    <!-- Flowers animation dalam kotak -->
+    <div class="flowers" id="flowers"></div>
+
+    <!-- Page 1 -->
+    <div class="page active">
+      <h1>💜 HAPPY BIRTHDAY 💜</h1>
+      <div class="icons"><img src="assets/images/cake.gif" alt="Cake"></div>
+      <p>𝑨𝒔𝒔𝒂𝒍𝒂𝒎𝒖𝒂𝒍𝒂𝒊𝒌𝒖𝒎 𝒏 𝒉𝒚𝒆 𝒃𝒂𝒃𝒚 𝒔𝒂𝒚𝒂𝒏𝒈𝒈 ! 𝑭𝒊𝒓𝒔𝒕 𝒐𝒇 𝒂𝒍𝒍 𝒉𝒂𝒑𝒑𝒚 𝒃𝒊𝒓𝒕𝒉𝒅𝒂𝒚 𝒕𝒐 𝒚𝒐𝒖 𝒔𝒂𝒚𝒂𝒏𝒈 ! 𝒅𝒂𝒉 𝒃𝒆𝒓𝒕𝒂𝒎𝒃𝒂𝒉 𝒔𝒂𝒕𝒖 𝒕𝒂𝒉𝒖𝒏 𝒖𝒔𝒊𝒂 𝒌𝒂𝒎𝒖𝒖 𝒃𝒂𝒃𝒚𝒚 𝒉𝒆𝒉𝒆. 𝑯𝒂𝒓𝒊𝒏𝒊 𝒂𝒅𝒂𝒍𝒂𝒉 𝒉𝒂𝒓𝒊 𝒚𝒂𝒏𝒈 𝒔𝒑𝒆𝒄𝒊𝒂𝒍 𝒃𝒖𝒂𝒕 𝒌𝒂𝒎𝒖🎉 𝑺𝒆𝒎𝒐𝒈𝒂 𝒌𝒂𝒎𝒖 𝒑𝒂𝒏𝒋𝒂𝒏𝒈 𝒖𝒎𝒖𝒓 𝒅𝒂𝒏 𝒅𝒊𝒎𝒖𝒓𝒂𝒉𝒌𝒂𝒏 𝒔𝒆𝒈𝒂𝒍𝒂 𝒓𝒆𝒛𝒆𝒌𝒊</p>
+    </div>
+
+    <!-- Page 2 -->
+    <div class="page">
+      <h3>  NUR ISLAHHIYAH MUNIRAH </h3>
+      <p>𝑫𝒂𝒉 𝒃𝒆𝒔𝒂𝒓-𝒃𝒆𝒔𝒂𝒓 𝒏𝒊 𝒉𝒂𝒅𝒊𝒂𝒉 𝒕𝒂𝒌 𝒂𝒅𝒂 𝒚𝒆 𝒔𝒐𝒓𝒓𝒚𝒚 𝒔𝒆𝒃𝒂𝒃 𝒅𝒂𝒉 𝒌𝒆𝒌𝒖𝒓𝒂𝒏𝒈𝒂𝒏 𝒅𝒖𝒊𝒕 𝒕𝒂𝒑𝒊 𝒏𝒂𝒏𝒕𝒊 𝒌𝒊𝒕𝒂 𝒑𝒆𝒓𝒈𝒊 𝒎𝒂𝒌𝒂𝒏-𝒎𝒂𝒌𝒂𝒏 𝒐𝒌𝒆𝒚 𝒔𝒂𝒚𝒂𝒏𝒈 ! 𝑻𝒉𝒂𝒏𝒌 𝒚𝒐𝒖 𝒔𝒆𝒃𝒂𝒃 𝒅𝒂𝒉 𝒋𝒂𝒅𝒊 𝒎𝒂𝒏𝒖𝒔𝒊𝒂 𝒅𝒂𝒏 𝒐𝒓𝒂𝒏𝒈 𝒚𝒂𝒏𝒈 𝒃𝒆𝒓𝒈𝒖𝒏𝒂 𝒖𝒏𝒕𝒖𝒌 𝒊𝒑𝒂𝒏𝒏, 𝒊𝒑𝒂𝒏𝒏 𝒂𝒑𝒓𝒆𝒄𝒊𝒂𝒕𝒆 𝒔𝒆𝒈𝒂𝒍𝒂 𝒂𝒑𝒂 𝒚𝒈 𝒌𝒂𝒎𝒖 𝒕𝒆𝒍𝒂𝒉 𝒃𝒂𝒈𝒊 𝒅𝒆𝒌𝒂𝒕 𝒊𝒑𝒂𝒏𝒏</p>
+      <img src="assets/images/gift2.jpg" width="150" alt="Gift">
+      <p>𝑯𝒂𝒓𝒊 𝒊𝒏𝒊, 𝑰𝒑𝒂𝒏𝒏 𝒏𝒂𝒌 𝒌𝒂𝒎𝒖 𝒕𝒂𝒉𝒖 𝒃𝒆𝒕𝒂𝒑𝒂 𝒃𝒆𝒔𝒂𝒓 𝒄𝒊𝒏𝒕𝒂 𝒊𝒑𝒂𝒏𝒏 𝒖𝒏𝒕𝒖𝒌 𝒌𝒂𝒎𝒖. 𝑩𝒖𝒌𝒂𝒏 𝒔𝒆𝒌𝒂𝒅𝒂𝒓 𝒉𝒂𝒓𝒊 𝒏𝒊, 𝒃𝒖𝒌𝒂𝒏 𝒔𝒆𝒌𝒂𝒅𝒂𝒓 𝒘𝒂𝒌𝒕𝒖 𝒌𝒊𝒕𝒂 𝒃𝒆𝒓𝒔𝒂𝒎𝒂, 𝒕𝒂𝒑𝒊 𝒔𝒂𝒎𝒑𝒂𝒊 𝒃𝒊𝒍𝒂-𝒃𝒊𝒍𝒂.</p>
+    </div>
+
+    <!-- Page 3 -->
+    <div class="page">
+      <h3>🎁 MY COMELL —</h3>
+      <img src="assets/images/gift.jpg" width="150" alt="Gift">
+      <p>𝑻𝒆𝒓𝒊𝒎𝒂𝒍𝒂𝒉 𝒉𝒂𝒅𝒊𝒂𝒉 𝒚𝒂𝒏𝒈 𝒔𝒆𝒅𝒆𝒓𝒉𝒂𝒏𝒂 𝒅𝒂𝒓𝒊 𝒊𝒑𝒂𝒏𝒏 𝒉𝒊𝒉𝒊𝒉𝒊... 𝒔𝒂𝒕𝒖 𝒋𝒂 𝒏𝒂𝒌 𝒄𝒂𝒌𝒂𝒑, 𝒌𝒂𝒎𝒖 𝒃𝒖𝒌𝒂𝒏 𝒔𝒂𝒋𝒂 𝒉𝒂𝒅𝒊𝒓 𝒅𝒂𝒍𝒂𝒎 𝒉𝒊𝒅𝒖𝒑 𝑰𝒑𝒂𝒏𝒏, 𝒕𝒂𝒑𝒊 𝒋𝒖𝒈𝒂 𝒎𝒆𝒍𝒆𝒏𝒈𝒌𝒂𝒑𝒌𝒂𝒏 𝒔𝒆𝒈𝒂𝒍𝒂𝒏𝒚𝒂. 𝑲𝒂𝒎𝒖 𝒃𝒖𝒌𝒂𝒏 𝒔𝒆𝒌𝒂𝒅𝒂𝒓 𝒑𝒂𝒔𝒂𝒏𝒈𝒂𝒏, 𝑲𝒂𝒎𝒖 𝒂𝒅𝒂𝒍𝒂𝒉 𝒔𝒂𝒉𝒂𝒃𝒂𝒕, 𝒑𝒆𝒏𝒅𝒆𝒏𝒈𝒂𝒓 𝒔𝒆𝒕𝒊𝒂, 𝒑𝒆𝒏𝒚𝒐𝒌𝒐𝒏𝒈 𝒌𝒖𝒂𝒕, 𝒅𝒂𝒏 𝒉𝒂𝒅𝒊𝒂𝒉 𝒑𝒂𝒍𝒊𝒏𝒈 𝒃𝒆𝒓𝒉𝒂𝒓𝒈𝒂 𝒃𝒖𝒂𝒕 𝒅𝒊𝒓𝒊 𝒊𝒑𝒂𝒏𝒏. 
+      <p>💜 𝐋𝐎𝐕𝐄 𝐘𝐎𝐔 𝐒𝐀𝐘𝐀𝐍𝐆 💜</p>
+      <a href="https://wa.link/i89ndv" target="_blank" class="whatsapp">💬 Dah ka? are you ready to go next?</a>
+    </div>
+
+    <!-- Navigation buttons -->
+    <div class="nav-buttons">
+      <button class="btn" onclick="prevPage()">⬅ Prev</button>
+      <button class="btn" onclick="nextPage()">Next ➡</button>
+    </div>
+
+    <!-- Music buttons -->
+    <div class="buttons">
+      <button class="btn" onclick="toggleMusic()">Main / Pause Lagu</button>
+      <button class="btn" onclick="unmute()">Unmute (bunyi)</button>
+    </div>
+
+    <audio id="bg-music" loop>
+      <source src="assets/music/Tahta_Hatiku.mp3" type="audio/mpeg">
+    </audio>
+  </div>
+
+  <script>
+    const envelope = document.getElementById("envelope");
+    const envelopeScreen = document.getElementById("envelopeScreen");
+    const loading = document.getElementById("loading");
+    const card = document.getElementById("card");
+    const music = document.getElementById("bg-music");
+
+    const pages = document.querySelectorAll(".page");
+    let currentPage = 0;
+
+    envelope.addEventListener("click", () => {
+      let count = 3;
+      loading.style.display = "block";
+      loading.textContent = "⏳ " + count;
+
+      const countdown = setInterval(() => {
+        count--;
+        if (count > 0) {
+          loading.textContent = "⏳ " + count;
+        } else {
+          clearInterval(countdown);
+          envelopeScreen.style.display = "none";
+          card.style.display = "block";
+          music.play();
+          startFlowers();
+          startFlowersBg();
+        }
+      }, 1000);
+    });
+
+    function toggleMusic() {
+      if (music.paused) music.play();
+      else music.pause();
+    }
+
+    function unmute() {
+      music.muted = false;
+      music.play();
+    }
+
+    function showPage(index) {
+      pages.forEach((page, i) => {
+        page.classList.remove("active");
+        if (i === index) {
+          setTimeout(() => page.classList.add("active"), 50);
+        }
+      });
+    }
+
+    function nextPage() {
+      currentPage = (currentPage + 1) % pages.length;
+      showPage(currentPage);
+    }
+
+    function prevPage() {
+      currentPage = (currentPage - 1 + pages.length) % pages.length;
+      showPage(currentPage);
+    }
+
+    function startFlowers() {
+      const flowersContainer = document.getElementById("flowers");
+      setInterval(() => {
+        const flower = document.createElement("div");
+        flower.classList.add("flower");
+        flower.innerHTML = "🌸";
+        flower.style.left = Math.random() * 100 + "vw";
+        flower.style.animationDuration = 3 + Math.random() * 5 + "s";
+        flower.style.fontSize = 20 + Math.random() * 20 + "px";
+        flowersContainer.appendChild(flower);
+        setTimeout(() => { flower.remove(); }, 8000);
+      }, 700);
+    }
+
+    function startFlowersBg() {
+      const flowersBg = document.getElementById("flowersBg");
+      setInterval(() => {
+        const flower = document.createElement("div");
+        flower.classList.add("flower-bg");
+        flower.innerHTML = "💜";
+        flower.style.left = Math.random() * 100 + "vw";
+        flower.style.animationDuration = 4 + Math.random() * 6 + "s";
+        flower.style.fontSize = 25 + Math.random() * 25 + "px";
+        flowersBg.appendChild(flower);
+        setTimeout(() => { flower.remove(); }, 10000);
+      }, 900);
+    }
+  </script>
+</body>
+</html>
+
+
+
+
