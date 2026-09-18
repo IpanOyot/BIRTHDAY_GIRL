@@ -1,337 +1,1680 @@
+```html
 <!DOCTYPE html>
 <html lang="ms">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Happy Birthday Islahh!</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Poppins', sans-serif;
-      background: #c8a2c8; /* Lilac background */
-      color: white;
-      text-align: center;
-      overflow-x: hidden;
-      overflow-y: hidden;
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Her Special Day 💗</title>
+
+<style>
+
+/* =====================================================
+   BASIC
+===================================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Georgia, "Times New Roman", serif;
+    background: #120016;
+    color: white;
+    overflow-x: hidden;
+}
+
+
+/* =====================================================
+   MAIN BACKGROUND
+===================================================== */
+
+.page {
+    min-height: 100vh;
+
+    position: relative;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    overflow: hidden;
+
+    background:
+        radial-gradient(
+            circle at 50% 35%,
+            rgba(153, 44, 160, 0.55),
+            transparent 35%
+        ),
+
+        radial-gradient(
+            circle at 15% 80%,
+            rgba(255, 76, 157, 0.20),
+            transparent 35%
+        ),
+
+        radial-gradient(
+            circle at 90% 15%,
+            rgba(100, 30, 180, 0.25),
+            transparent 30%
+        ),
+
+        linear-gradient(
+            145deg,
+            #0b0010,
+            #220026,
+            #130017,
+            #09000d
+        );
+}
+
+
+/* =====================================================
+   PURPLE GLOW
+===================================================== */
+
+.glow {
+    position: absolute;
+
+    width: 450px;
+    height: 450px;
+
+    border-radius: 50%;
+
+    background: rgba(196, 64, 255, 0.15);
+
+    filter: blur(100px);
+
+    animation: glowMove 8s ease-in-out infinite alternate;
+}
+
+.glow.one {
+    top: -180px;
+    left: -150px;
+}
+
+.glow.two {
+    bottom: -200px;
+    right: -150px;
+
+    background: rgba(255, 69, 160, 0.14);
+
+    animation-delay: 2s;
+}
+
+@keyframes glowMove {
+
+    0% {
+        transform: translate(0, 0) scale(1);
     }
 
-    /* --- ENVELOPE SCREEN --- */
-    .envelope-screen {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      flex-direction: column;
-      background: #c8a2c8;
-      position: relative;
-      z-index: 2;
+    100% {
+        transform: translate(80px, 50px) scale(1.25);
     }
 
-    .envelope-screen img {
-      width: 200px;
-      cursor: pointer;
-      transition: transform 0.3s;
+}
+
+
+/* =====================================================
+   STARS
+===================================================== */
+
+.stars {
+    position: absolute;
+
+    inset: 0;
+
+    overflow: hidden;
+
+    pointer-events: none;
+}
+
+.star {
+    position: absolute;
+
+    width: 3px;
+    height: 3px;
+
+    border-radius: 50%;
+
+    background: white;
+
+    opacity: 0.7;
+
+    animation: twinkle 2s ease-in-out infinite;
+}
+
+@keyframes twinkle {
+
+    0%, 100% {
+        opacity: 0.2;
+        transform: scale(0.7);
     }
 
-    .envelope-screen img:hover {
-      transform: scale(1.1);
+    50% {
+        opacity: 1;
+        transform: scale(1.4);
     }
 
-    /* COUNTDOWN BESAR */
-    .loading {
-      display: none;
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      font-size: 80px;
-      font-weight: bold;
-      color: #fff;
-      z-index: 9999;
-      animation: pop 1s ease-in-out infinite;
+}
+
+
+/* =====================================================
+   FLOATING LIGHTS
+===================================================== */
+
+.lights {
+    position: absolute;
+
+    inset: 0;
+
+    pointer-events: none;
+
+    overflow: hidden;
+}
+
+.light {
+    position: absolute;
+
+    width: 8px;
+    height: 8px;
+
+    border-radius: 50%;
+
+    background: rgba(255,255,255,0.75);
+
+    box-shadow:
+        0 0 15px rgba(255,255,255,0.8);
+
+    animation: floatLight linear infinite;
+}
+
+@keyframes floatLight {
+
+    0% {
+        transform: translateY(110vh) scale(0.5);
+        opacity: 0;
     }
 
-    @keyframes pop {
-      0% { transform: translate(-50%, -50%) scale(0.5); opacity: 0.3; }
-      50% { transform: translate(-50%, -50%) scale(1.2); opacity: 1; }
-      100% { transform: translate(-50%, -50%) scale(0.5); opacity: 0.3; }
+    15% {
+        opacity: 0.8;
     }
 
-    /* --- CARD --- */
-    .card {
-      display: none;
-      background: #800080; /* Purple dalam kotak */
-      margin: 40px auto;
-      padding: 30px;
-      border-radius: 25px;
-      max-width: 700px;
-      box-shadow: 0px 8px 20px rgba(0,0,0,0.2);
-      animation: fadeIn 1s ease-in-out;
-      position: relative;
-      overflow: hidden;
-      z-index: 2;
+    85% {
+        opacity: 0.8;
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(30px); }
-      to { opacity: 1; transform: translateY(0); }
+    100% {
+        transform: translateY(-20vh) scale(1.2);
+        opacity: 0;
     }
 
-    h1 { font-size: 2.2em; font-weight: bold; }
-    p { font-size: 1.1em; line-height: 1.6; }
+}
 
-    .icons img {
-      width: 100px;
-      height: 100px;
-      animation: bounce 2s infinite;
+
+/* =====================================================
+   FALLING PETALS
+===================================================== */
+
+.petals {
+    position: absolute;
+
+    inset: 0;
+
+    overflow: hidden;
+
+    pointer-events: none;
+}
+
+.petal {
+    position: absolute;
+
+    top: -50px;
+
+    font-size: 20px;
+
+    opacity: 0.7;
+
+    animation: fall linear infinite;
+}
+
+@keyframes fall {
+
+    0% {
+        transform:
+            translateY(-50px)
+            rotate(0deg);
+
+        opacity: 0;
     }
 
-    @keyframes bounce {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-15px); }
+    15% {
+        opacity: 0.8;
     }
 
-    .buttons { margin-top: 20px; }
+    100% {
+        transform:
+            translateY(110vh)
+            translateX(80px)
+            rotate(360deg);
 
-    .btn {
-      background: white;
-      color: #ff3e9e;
-      font-weight: bold;
-      border: none;
-      padding: 10px 15px;
-      margin: 5px;
-      border-radius: 25px;
-      cursor: pointer;
-      transition: 0.3s;
+        opacity: 0;
     }
 
-    .btn:hover { background: #ffd6ef; }
+}
 
-    .whatsapp {
-      text-decoration: none;
-      background: #25d366;
-      color: white;
-      padding: 10px 20px;
-      border-radius: 25px;
-      font-weight: bold;
-      display: inline-block;
-      margin-top: 15px;
+
+/* =====================================================
+   MAIN CONTENT
+===================================================== */
+
+.content {
+
+    width: 100%;
+    max-width: 900px;
+
+    padding: 30px;
+
+    text-align: center;
+
+    position: relative;
+
+    z-index: 5;
+
+    animation: contentAppear 1.5s ease;
+}
+
+@keyframes contentAppear {
+
+    from {
+        opacity: 0;
+        transform: translateY(30px);
     }
 
-    audio { margin-top: 20px; }
-
-    /* --- MULTI PAGE --- */
-    .page {
-      opacity: 0;
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      transition: opacity 0.8s ease;
-      pointer-events: none;
+    to {
+        opacity: 1;
+        transform: translateY(0);
     }
 
-    .page.active {
-      opacity: 1;
-      position: relative;
-      pointer-events: auto;
+}
+
+
+/* =====================================================
+   TOP SMALL TEXT
+===================================================== */
+
+.small-title {
+
+    font-size: 12px;
+
+    letter-spacing: 5px;
+
+    text-transform: uppercase;
+
+    color: #f5c5dd;
+
+    margin-bottom: 20px;
+
+    animation: fadePulse 3s ease-in-out infinite;
+}
+
+@keyframes fadePulse {
+
+    0%,100% {
+        opacity: 0.5;
     }
 
-    .nav-buttons { margin-top: 20px; }
-
-    /* --- FLOWER ANIMATION --- */
-    .flowers {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
-      z-index: 1;
-      pointer-events: none;
+    50% {
+        opacity: 1;
     }
 
-    .flower {
-      position: absolute;
-      top: -10%;
-      font-size: 24px;
-      color: #c65ecf;
-      animation: fall linear infinite;
+}
+
+
+/* =====================================================
+   MAIN TITLE
+===================================================== */
+
+h1 {
+
+    font-size: clamp(45px, 8vw, 90px);
+
+    font-style: italic;
+
+    font-weight: normal;
+
+    line-height: 1;
+
+    margin-bottom: 15px;
+
+    color: #fff;
+
+    text-shadow:
+        0 0 10px rgba(255,255,255,0.4),
+        0 0 30px rgba(255,110,190,0.35);
+
+    animation: titleGlow 3s ease-in-out infinite alternate;
+}
+
+@keyframes titleGlow {
+
+    from {
+        text-shadow:
+            0 0 10px rgba(255,255,255,0.3),
+            0 0 20px rgba(255,100,190,0.2);
     }
 
-    @keyframes fall {
-      0% { transform: translateY(-10%) rotate(0deg); opacity: 1; }
-      100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+    to {
+        text-shadow:
+            0 0 20px rgba(255,255,255,0.7),
+            0 0 50px rgba(255,100,190,0.5);
     }
 
-    /* --- FLOWER ANIMATION LUAR KOTAK --- */
-    .flowers-bg {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
-      z-index: 0;
-      pointer-events: none;
+}
+
+
+/* =====================================================
+   SECOND TITLE
+===================================================== */
+
+.subtitle {
+
+    font-size: clamp(24px, 4vw, 42px);
+
+    font-style: italic;
+
+    margin-bottom: 20px;
+
+    color: #f8e8f0;
+}
+
+
+/* =====================================================
+   DESCRIPTION
+===================================================== */
+
+.description {
+
+    font-family: Poppins, Arial, sans-serif;
+
+    font-size: 13px;
+
+    color: #e7cbdc;
+
+    letter-spacing: 1px;
+
+    margin-bottom: 35px;
+}
+
+
+/* =====================================================
+   HEART
+===================================================== */
+
+.heart {
+
+    display: inline-block;
+
+    color: #ff91c5;
+
+    animation: heartbeat 1.5s infinite;
+
+}
+
+@keyframes heartbeat {
+
+    0%, 100% {
+        transform: scale(1);
     }
 
-    .flower-bg {
-      position: absolute;
-      top: -10%;
-      font-size: 28px;
-      color: #ffffff;
-      animation: fall linear infinite;
+    15% {
+        transform: scale(1.2);
     }
-  </style>
+
+    30% {
+        transform: scale(1);
+    }
+
+}
+
+
+/* =====================================================
+   COUNTDOWN
+===================================================== */
+
+.countdown {
+
+    display: flex;
+
+    justify-content: center;
+
+    gap: 18px;
+
+    margin: 20px auto 35px;
+
+    flex-wrap: wrap;
+}
+
+.time-box {
+
+    width: 110px;
+
+    height: 95px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    align-items: center;
+
+    border-radius: 12px;
+
+    border: 1px solid rgba(255,255,255,0.28);
+
+    background:
+        rgba(255,255,255,0.07);
+
+    box-shadow:
+        inset 0 0 20px rgba(255,255,255,0.04),
+        0 10px 30px rgba(0,0,0,0.25);
+
+    backdrop-filter: blur(8px);
+
+    transition: 0.3s;
+}
+
+.time-box:hover {
+
+    transform: translateY(-7px);
+
+    border-color: rgba(255,151,205,0.6);
+
+    box-shadow:
+        0 10px 35px rgba(255,78,165,0.2);
+}
+
+.number {
+
+    font-family: Georgia, serif;
+
+    font-size: 38px;
+
+    font-weight: bold;
+
+    text-shadow:
+        0 0 15px rgba(255,255,255,0.4);
+}
+
+.label {
+
+    font-family: Poppins, Arial, sans-serif;
+
+    font-size: 9px;
+
+    letter-spacing: 3px;
+
+    margin-top: 5px;
+
+    color: #d9bacb;
+}
+
+
+/* =====================================================
+   LITTLE MESSAGE
+===================================================== */
+
+.message {
+
+    font-family: Poppins, Arial, sans-serif;
+
+    font-size: 12px;
+
+    color: #eecddd;
+
+    margin-bottom: 25px;
+}
+
+
+/* =====================================================
+   BUTTON
+===================================================== */
+
+.open-btn {
+
+    display: inline-flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    gap: 8px;
+
+    padding: 14px 28px;
+
+    border-radius: 40px;
+
+    border: 1px solid rgba(255,255,255,0.35);
+
+    background:
+        linear-gradient(
+            135deg,
+            #ff91c5,
+            #e65caa
+        );
+
+    color: white;
+
+    font-family: Poppins, Arial, sans-serif;
+
+    font-weight: 600;
+
+    font-size: 12px;
+
+    letter-spacing: 1px;
+
+    cursor: pointer;
+
+    text-decoration: none;
+
+    box-shadow:
+        0 8px 30px rgba(255,79,160,0.3);
+
+    transition: 0.3s;
+
+    animation: buttonPulse 2.5s infinite;
+}
+
+.open-btn:hover {
+
+    transform:
+        translateY(-4px)
+        scale(1.04);
+
+    box-shadow:
+        0 12px 40px rgba(255,79,160,0.5);
+}
+
+@keyframes buttonPulse {
+
+    0%,100% {
+        box-shadow:
+            0 8px 30px rgba(255,79,160,0.25);
+    }
+
+    50% {
+        box-shadow:
+            0 8px 45px rgba(255,79,160,0.55);
+    }
+
+}
+
+
+/* =====================================================
+   SECOND PAGE
+===================================================== */
+
+#giftPage {
+
+    display: none;
+
+    min-height: 100vh;
+
+    position: relative;
+
+    justify-content: center;
+
+    align-items: center;
+
+    padding: 30px;
+
+    overflow: hidden;
+
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(182,46,164,0.35),
+            transparent 50%
+        ),
+        linear-gradient(
+            145deg,
+            #130017,
+            #2b002d,
+            #100014
+        );
+}
+
+
+/* =====================================================
+   GIFT CONTENT
+===================================================== */
+
+.gift-content {
+
+    max-width: 650px;
+
+    text-align: center;
+
+    position: relative;
+
+    z-index: 5;
+
+    animation: giftAppear 1s ease;
+}
+
+@keyframes giftAppear {
+
+    from {
+        opacity: 0;
+        transform: scale(0.9) translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+
+}
+
+.gift-content h2 {
+
+    font-size: 45px;
+
+    font-style: italic;
+
+    margin-bottom: 20px;
+}
+
+.gift-content p {
+
+    font-family: Poppins, Arial, sans-serif;
+
+    font-size: 15px;
+
+    line-height: 1.8;
+
+    color: #ead1df;
+
+    margin-bottom: 25px;
+}
+
+.gift-image {
+
+    width: 180px;
+
+    max-width: 70%;
+
+    border-radius: 20px;
+
+    box-shadow:
+        0 15px 50px rgba(255,77,170,0.25);
+
+    animation: giftFloat 3s ease-in-out infinite;
+}
+
+@keyframes giftFloat {
+
+    0%,100% {
+        transform: translateY(0) rotate(-2deg);
+    }
+
+    50% {
+        transform: translateY(-12px) rotate(2deg);
+    }
+
+}
+
+
+/* =====================================================
+   NEXT BUTTON
+===================================================== */
+
+.next-btn {
+
+    display: inline-block;
+
+    margin-top: 15px;
+
+    padding: 12px 25px;
+
+    border-radius: 30px;
+
+    background: rgba(255,255,255,0.1);
+
+    border: 1px solid rgba(255,255,255,0.3);
+
+    color: white;
+
+    font-family: Poppins, Arial, sans-serif;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+}
+
+.next-btn:hover {
+
+    background: rgba(255,137,195,0.25);
+
+    transform: translateY(-3px);
+}
+
+
+/* =====================================================
+   THIRD PAGE
+===================================================== */
+
+#messagePage {
+
+    display: none;
+
+    min-height: 100vh;
+
+    position: relative;
+
+    justify-content: center;
+
+    align-items: center;
+
+    padding: 30px;
+
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(255,80,160,0.25),
+            transparent 45%
+        ),
+        linear-gradient(
+            145deg,
+            #100013,
+            #280026,
+            #0b000e
+        );
+}
+
+.message-card {
+
+    max-width: 700px;
+
+    text-align: center;
+
+    padding: 45px 30px;
+
+    border-radius: 30px;
+
+    background:
+        rgba(255,255,255,0.06);
+
+    border:
+        1px solid rgba(255,255,255,0.15);
+
+    backdrop-filter: blur(12px);
+
+    box-shadow:
+        0 20px 60px rgba(0,0,0,0.35);
+
+    animation: messageAppear 1s ease;
+}
+
+@keyframes messageAppear {
+
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+}
+
+.message-card h2 {
+
+    font-size: 38px;
+
+    font-style: italic;
+
+    margin-bottom: 25px;
+}
+
+.message-card p {
+
+    font-family: Poppins, Arial, sans-serif;
+
+    font-size: 14px;
+
+    line-height: 1.9;
+
+    color: #ead2df;
+}
+
+.love {
+
+    font-size: 22px;
+
+    margin-top: 25px;
+
+    color: #ff9ac8;
+
+    animation: heartbeat 1.5s infinite;
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 600px) {
+
+    .content {
+        padding: 20px;
+    }
+
+    .small-title {
+        font-size: 9px;
+        letter-spacing: 3px;
+    }
+
+    .description {
+        font-size: 11px;
+    }
+
+    .countdown {
+        gap: 8px;
+    }
+
+    .time-box {
+        width: 75px;
+        height: 75px;
+    }
+
+    .number {
+        font-size: 27px;
+    }
+
+    .label {
+        font-size: 7px;
+        letter-spacing: 1px;
+    }
+
+    .open-btn {
+        padding: 12px 20px;
+        font-size: 11px;
+    }
+
+    .gift-content h2 {
+        font-size: 34px;
+    }
+
+    .message-card h2 {
+        font-size: 30px;
+    }
+
+}
+
+
+/* =====================================================
+   MUSIC BUTTON
+===================================================== */
+
+.music-btn {
+
+    position: fixed;
+
+    bottom: 20px;
+
+    right: 20px;
+
+    z-index: 50;
+
+    width: 45px;
+
+    height: 45px;
+
+    border-radius: 50%;
+
+    border: 1px solid rgba(255,255,255,0.25);
+
+    background: rgba(255,255,255,0.08);
+
+    color: white;
+
+    cursor: pointer;
+
+    backdrop-filter: blur(10px);
+
+    transition: 0.3s;
+}
+
+.music-btn:hover {
+
+    background: rgba(255,120,190,0.25);
+
+    transform: scale(1.1);
+}
+
+</style>
 </head>
+
+
 <body>
 
-  <!-- Background Flowers (LUAR KOTAK) -->
-  <div class="flowers-bg" id="flowersBg"></div>
 
-  <!-- Envelope screen -->
-  <div class="envelope-screen" id="envelopeScreen">
-    <img src="assets/images/envelope.png" alt="Envelope" id="envelope">
-    <div class="loading" id="loading">⏳ 3</div>
-  </div>
+<!-- =====================================================
+     FIRST PAGE
+===================================================== -->
 
-  <!-- Birthday card -->
-  <div class="card" id="card">
-    <!-- Flowers animation dalam kotak -->
-    <div class="flowers" id="flowers"></div>
+<section class="page" id="homePage">
 
-    <!-- Page 1 -->
-    <div class="page active">
-      <h1>💜 HAPPY BIRTHDAY 💜</h1>
-      <div class="icons"><img src="assets/images/cake.gif" alt="Cake"></div>
-      <p>𝑨𝒔𝒔𝒂𝒍𝒂𝒎𝒖𝒂𝒍𝒂𝒊𝒌𝒖𝒎 𝒏 𝒉𝒚𝒆 𝒃𝒂𝒃𝒚 𝒔𝒂𝒚𝒂𝒏𝒈𝒈 ! 𝑭𝒊𝒓𝒔𝒕 𝒐𝒇 𝒂𝒍𝒍 𝒉𝒂𝒑𝒑𝒚 𝒃𝒊𝒓𝒕𝒉𝒅𝒂𝒚 𝒕𝒐 𝒚𝒐𝒖 𝒔𝒂𝒚𝒂𝒏𝒈 ! 𝒅𝒂𝒉 𝒃𝒆𝒓𝒕𝒂𝒎𝒃𝒂𝒉 𝒔𝒂𝒕𝒖 𝒕𝒂𝒉𝒖𝒏 𝒖𝒔𝒊𝒂 𝒌𝒂𝒎𝒖𝒖 𝒃𝒂𝒃𝒚𝒚 𝒉𝒆𝒉𝒆. 𝑯𝒂𝒓𝒊𝒏𝒊 𝒂𝒅𝒂𝒍𝒂𝒉 𝒉𝒂𝒓𝒊 𝒚𝒂𝒏𝒈 𝒔𝒑𝒆𝒄𝒊𝒂𝒍 𝒃𝒖𝒂𝒕 𝒌𝒂𝒎𝒖🎉 𝑺𝒆𝒎𝒐𝒈𝒂 𝒌𝒂𝒎𝒖 𝒑𝒂𝒏𝒋𝒂𝒏𝒈 𝒖𝒎𝒖𝒓 𝒅𝒂𝒏 𝒅𝒊𝒎𝒖𝒓𝒂𝒉𝒌𝒂𝒏 𝒔𝒆𝒈𝒂𝒍𝒂 𝒓𝒆𝒛𝒆𝒌𝒊</p>
+    <!-- Glow -->
+    <div class="glow one"></div>
+    <div class="glow two"></div>
+
+
+    <!-- Stars -->
+    <div class="stars" id="stars"></div>
+
+
+    <!-- Floating lights -->
+    <div class="lights" id="lights"></div>
+
+
+    <!-- Falling petals -->
+    <div class="petals" id="petals"></div>
+
+
+    <!-- Main -->
+    <div class="content">
+
+        <div class="small-title">
+            ✦ MENGHITUNG HARI ✦
+        </div>
+
+
+        <h1>
+            Her Special Day
+        </h1>
+
+
+        <div class="subtitle">
+            is Coming
+        </div>
+
+
+        <div class="description">
+            Sesuatu yang indah sedang menunggu awak
+            <span class="heart">♡</span>
+        </div>
+
+
+        <!-- COUNTDOWN -->
+
+        <div class="countdown">
+
+            <div class="time-box">
+                <div class="number" id="days">
+                    00
+                </div>
+
+                <div class="label">
+                    HARI
+                </div>
+            </div>
+
+
+            <div class="time-box">
+                <div class="number" id="hours">
+                    00
+                </div>
+
+                <div class="label">
+                    JAM
+                </div>
+            </div>
+
+
+            <div class="time-box">
+                <div class="number" id="minutes">
+                    00
+                </div>
+
+                <div class="label">
+                    MINIT
+                </div>
+            </div>
+
+
+            <div class="time-box">
+                <div class="number" id="seconds">
+                    00
+                </div>
+
+                <div class="label">
+                    SAAT
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="message">
+            ♡ Hari ini adalah hari istimewa untuk seseorang yang istimewa ♡
+        </div>
+
+
+        <!-- BUTTON -->
+
+        <button
+            class="open-btn"
+            onclick="openGift()"
+        >
+
+            ✦ OPEN HER GIFT ✦
+
+        </button>
+
     </div>
 
-    <!-- Page 2 -->
-    <div class="page">
-      <h3>  NUR ISLAHHIYAH MUNIRAH </h3>
-      <p>𝑫𝒂𝒉 𝒃𝒆𝒔𝒂𝒓-𝒃𝒆𝒔𝒂𝒓 𝒏𝒊 𝒉𝒂𝒅𝒊𝒂𝒉 𝒕𝒂𝒌 𝒂𝒅𝒂 𝒚𝒆 𝒔𝒐𝒓𝒓𝒚𝒚 𝒔𝒆𝒃𝒂𝒃 𝒅𝒂𝒉 𝒌𝒆𝒌𝒖𝒓𝒂𝒏𝒈𝒂𝒏 𝒅𝒖𝒊𝒕 𝒕𝒂𝒑𝒊 𝒏𝒂𝒏𝒕𝒊 𝒌𝒊𝒕𝒂 𝒑𝒆𝒓𝒈𝒊 𝒎𝒂𝒌𝒂𝒏-𝒎𝒂𝒌𝒂𝒏 𝒐𝒌𝒆𝒚 𝒔𝒂𝒚𝒂𝒏𝒈 ! 𝑻𝒉𝒂𝒏𝒌 𝒚𝒐𝒖 𝒔𝒆𝒃𝒂𝒃 𝒅𝒂𝒉 𝒋𝒂𝒅𝒊 𝒎𝒂𝒏𝒖𝒔𝒊𝒂 𝒅𝒂𝒏 𝒐𝒓𝒂𝒏𝒈 𝒚𝒂𝒏𝒈 𝒃𝒆𝒓𝒈𝒖𝒏𝒂 𝒖𝒏𝒕𝒖𝒌 𝒊𝒑𝒂𝒏𝒏, 𝒊𝒑𝒂𝒏𝒏 𝒂𝒑𝒓𝒆𝒄𝒊𝒂𝒕𝒆 𝒔𝒆𝒈𝒂𝒍𝒂 𝒂𝒑𝒂 𝒚𝒈 𝒌𝒂𝒎𝒖 𝒕𝒆𝒍𝒂𝒉 𝒃𝒂𝒈𝒊 𝒅𝒆𝒌𝒂𝒕 𝒊𝒑𝒂𝒏𝒏</p>
-      <img src="assets/images/gift2.jpg" width="150" alt="Gift">
-      <p>𝑯𝒂𝒓𝒊 𝒊𝒏𝒊, 𝑰𝒑𝒂𝒏𝒏 𝒏𝒂𝒌 𝒌𝒂𝒎𝒖 𝒕𝒂𝒉𝒖 𝒃𝒆𝒕𝒂𝒑𝒂 𝒃𝒆𝒔𝒂𝒓 𝒄𝒊𝒏𝒕𝒂 𝒊𝒑𝒂𝒏𝒏 𝒖𝒏𝒕𝒖𝒌 𝒌𝒂𝒎𝒖. 𝑩𝒖𝒌𝒂𝒏 𝒔𝒆𝒌𝒂𝒅𝒂𝒓 𝒉𝒂𝒓𝒊 𝒏𝒊, 𝒃𝒖𝒌𝒂𝒏 𝒔𝒆𝒌𝒂𝒅𝒂𝒓 𝒘𝒂𝒌𝒕𝒖 𝒌𝒊𝒕𝒂 𝒃𝒆𝒓𝒔𝒂𝒎𝒂, 𝒕𝒂𝒑𝒊 𝒔𝒂𝒎𝒑𝒂𝒊 𝒃𝒊𝒍𝒂-𝒃𝒊𝒍𝒂.</p>
+</section>
+
+
+
+<!-- =====================================================
+     SECOND PAGE
+===================================================== -->
+
+<section id="giftPage">
+
+    <div class="petals" id="petals2"></div>
+
+    <div class="gift-content">
+
+        <div class="small-title">
+            ✦ FOR YOU ✦
+        </div>
+
+
+        <h2>
+            Happy Birthday,
+            <br>
+            My Comell 💗
+        </h2>
+
+
+        <img
+            src="assets/images/gift2.jpg"
+            class="gift-image"
+            alt="Gift"
+        >
+
+
+        <p>
+
+            Assalamualaikum n hye baby sayangg! 💗
+
+            <br><br>
+
+            First of all,
+            Happy Birthday to you sayang!
+            Dah bertambah satu tahun usia kamuuu hehe.
+
+            <br><br>
+
+            Semoga awak sentiasa panjang umur,
+            dimurahkan rezeki dan diberikan
+            kebahagiaan dalam setiap langkah awak.
+
+        </p>
+
+
+        <button
+            class="next-btn"
+            onclick="openMessage()"
+        >
+
+            Next ✦
+
+        </button>
+
     </div>
 
-    <!-- Page 3 -->
-    <div class="page">
-      <h3>🎁 MY COMELL —</h3>
-      <img src="assets/images/gift.jpg" width="150" alt="Gift">
-      <p>𝑻𝒆𝒓𝒊𝒎𝒂𝒍𝒂𝒉 𝒉𝒂𝒅𝒊𝒂𝒉 𝒚𝒂𝒏𝒈 𝒔𝒆𝒅𝒆𝒓𝒉𝒂𝒏𝒂 𝒅𝒂𝒓𝒊 𝒊𝒑𝒂𝒏𝒏 𝒉𝒊𝒉𝒊𝒉𝒊... 𝒔𝒂𝒕𝒖 𝒋𝒂 𝒏𝒂𝒌 𝒄𝒂𝒌𝒂𝒑, 𝒌𝒂𝒎𝒖 𝒃𝒖𝒌𝒂𝒏 𝒔𝒂𝒋𝒂 𝒉𝒂𝒅𝒊𝒓 𝒅𝒂𝒍𝒂𝒎 𝒉𝒊𝒅𝒖𝒑 𝑰𝒑𝒂𝒏𝒏, 𝒕𝒂𝒑𝒊 𝒋𝒖𝒈𝒂 𝒎𝒆𝒍𝒆𝒏𝒈𝒌𝒂𝒑𝒌𝒂𝒏 𝒔𝒆𝒈𝒂𝒍𝒂𝒏𝒚𝒂. 𝑲𝒂𝒎𝒖 𝒃𝒖𝒌𝒂𝒏 𝒔𝒆𝒌𝒂𝒅𝒂𝒓 𝒑𝒂𝒔𝒂𝒏𝒈𝒂𝒏, 𝑲𝒂𝒎𝒖 𝒂𝒅𝒂𝒍𝒂𝒉 𝒔𝒂𝒉𝒂𝒃𝒂𝒕, 𝒑𝒆𝒏𝒅𝒆𝒏𝒈𝒂𝒓 𝒔𝒆𝒕𝒊𝒂, 𝒑𝒆𝒏𝒚𝒐𝒌𝒐𝒏𝒈 𝒌𝒖𝒂𝒕, 𝒅𝒂𝒏 𝒉𝒂𝒅𝒊𝒂𝒉 𝒑𝒂𝒍𝒊𝒏𝒈 𝒃𝒆𝒓𝒉𝒂𝒓𝒈𝒂 𝒃𝒖𝒂𝒕 𝒅𝒊𝒓𝒊 𝒊𝒑𝒂𝒏𝒏. 
-      <p>💜 𝐋𝐎𝐕𝐄 𝐘𝐎𝐔 𝐒𝐀𝐘𝐀𝐍𝐆 💜</p>
-      <a href="https://wa.link/i89ndv" target="_blank" class="whatsapp">💬 Dah ka? are you ready to go next?</a>
+</section>
+
+
+
+<!-- =====================================================
+     THIRD PAGE
+===================================================== -->
+
+<section id="messagePage">
+
+    <div class="message-card">
+
+        <div class="small-title">
+            ✦ A LITTLE MESSAGE FROM ME ✦
+        </div>
+
+
+        <h2>
+            For Nur Islahhiyah Munirah 💗
+        </h2>
+
+
+        <p>
+
+            Dah besar-besar ni hadiah tak ada yee,
+            sorry sebab dah kekurangan duit hehe 😭
+
+            <br><br>
+
+            Tapi nanti kita pergi makan-makan okay sayang.
+
+            <br><br>
+
+            Thank you sebab dah jadi manusia
+            dan orang yang berguna untuk Ipann.
+            Ipann appreciate segala apa yang kamu
+            telah bagi dekat Ipann.
+
+            <br><br>
+
+            Hari ini Ipann nak kamu tahu
+            betapa besar cinta Ipann untuk kamu.
+
+            <br><br>
+
+            Bukan sekadar hari ini,
+            bukan sekadar waktu kita bersama,
+            tapi sampai bila-bila.
+
+            <br><br>
+
+            Kamu bukan sekadar pasangan.
+            Kamu adalah sahabat,
+            pendengar setia,
+            penyokong kuat,
+            dan hadiah paling berharga
+            buat diri Ipann.
+
+        </p>
+
+
+        <div class="love">
+            💗 I LOVE YOU SAYANG 💗
+        </div>
+
+
+        <br>
+
+
+        <button
+            class="next-btn"
+            onclick="goBack()"
+        >
+
+            ← Back
+
+        </button>
+
     </div>
 
-    <!-- Navigation buttons -->
-    <div class="nav-buttons">
-      <button class="btn" onclick="prevPage()">⬅ Prev</button>
-      <button class="btn" onclick="nextPage()">Next ➡</button>
-    </div>
+</section>
 
-    <!-- Music buttons -->
-    <div class="buttons">
-      <button class="btn" onclick="toggleMusic()">Main / Pause Lagu</button>
-      <button class="btn" onclick="unmute()">Unmute (bunyi)</button>
-    </div>
 
-    <audio id="bg-music" loop>
-      <source src="assets/music/Tahta_Hatiku.mp3" type="audio/mpeg">
-    </audio>
-  </div>
 
-  <script>
-    const envelope = document.getElementById("envelope");
-    const envelopeScreen = document.getElementById("envelopeScreen");
-    const loading = document.getElementById("loading");
-    const card = document.getElementById("card");
-    const music = document.getElementById("bg-music");
+<!-- MUSIC -->
 
-    const pages = document.querySelectorAll(".page");
-    let currentPage = 0;
+<audio
+    id="bgMusic"
+    loop
+>
 
-    envelope.addEventListener("click", () => {
-      let count = 3;
-      loading.style.display = "block";
-      loading.textContent = "⏳ " + count;
+    <source
+        src="assets/music/Tahta_Hatiku.mp3"
+        type="audio/mpeg"
+    >
 
-      const countdown = setInterval(() => {
-        count--;
-        if (count > 0) {
-          loading.textContent = "⏳ " + count;
-        } else {
-          clearInterval(countdown);
-          envelopeScreen.style.display = "none";
-          card.style.display = "block";
-          music.play();
-          startFlowers();
-          startFlowersBg();
-        }
-      }, 1000);
-    });
+</audio>
 
-    function toggleMusic() {
-      if (music.paused) music.play();
-      else music.pause();
+
+<button
+    class="music-btn"
+    onclick="toggleMusic()"
+    id="musicButton"
+>
+
+    ♫
+
+</button>
+
+
+
+<script>
+
+
+/* =====================================================
+   SET BIRTHDAY DATE DI SINI
+===================================================== */
+
+/*
+
+   CONTOH:
+
+   Kalau birthday Islahh:
+   20 September 2026
+
+   Tulis:
+
+   const TARGET_DATE =
+       new Date("September 20, 2026 00:00:00").getTime();
+
+*/
+
+const TARGET_DATE =
+    new Date("September 20, 2026 00:00:00").getTime();
+
+
+
+/* =====================================================
+   COUNTDOWN
+===================================================== */
+
+function updateCountdown() {
+
+    const now =
+        new Date().getTime();
+
+    const distance =
+        TARGET_DATE - now;
+
+
+    if (distance <= 0) {
+
+        document.getElementById("days").innerText = "00";
+        document.getElementById("hours").innerText = "00";
+        document.getElementById("minutes").innerText = "00";
+        document.getElementById("seconds").innerText = "00";
+
+        document.querySelector(".small-title").innerText =
+            "✦ TODAY IS THE DAY ✦";
+
+        document.querySelector(".subtitle").innerText =
+            "Happy Birthday!";
+
+        return;
+
     }
 
-    function unmute() {
-      music.muted = false;
-      music.play();
+
+    const days =
+        Math.floor(
+            distance /
+            (1000 * 60 * 60 * 24)
+        );
+
+
+    const hours =
+        Math.floor(
+            (distance %
+                (1000 * 60 * 60 * 24))
+            /
+            (1000 * 60 * 60)
+        );
+
+
+    const minutes =
+        Math.floor(
+            (distance %
+                (1000 * 60 * 60))
+            /
+            (1000 * 60)
+        );
+
+
+    const seconds =
+        Math.floor(
+            (distance %
+                (1000 * 60))
+            /
+            1000
+        );
+
+
+    document.getElementById("days").innerText =
+        String(days).padStart(2, "0");
+
+
+    document.getElementById("hours").innerText =
+        String(hours).padStart(2, "0");
+
+
+    document.getElementById("minutes").innerText =
+        String(minutes).padStart(2, "0");
+
+
+    document.getElementById("seconds").innerText =
+        String(seconds).padStart(2, "0");
+
+}
+
+
+updateCountdown();
+
+setInterval(
+    updateCountdown,
+    1000
+);
+
+
+
+/* =====================================================
+   STARS
+===================================================== */
+
+const stars =
+    document.getElementById("stars");
+
+
+for (
+    let i = 0;
+    i < 100;
+    i++
+) {
+
+    const star =
+        document.createElement("div");
+
+    star.className = "star";
+
+
+    star.style.left =
+        Math.random() * 100 + "%";
+
+
+    star.style.top =
+        Math.random() * 100 + "%";
+
+
+    star.style.animationDelay =
+        Math.random() * 3 + "s";
+
+
+    star.style.animationDuration =
+        1.5 + Math.random() * 3 + "s";
+
+
+    stars.appendChild(star);
+
+}
+
+
+
+/* =====================================================
+   FLOATING LIGHTS
+===================================================== */
+
+const lights =
+    document.getElementById("lights");
+
+
+function createLight() {
+
+    const light =
+        document.createElement("div");
+
+    light.className = "light";
+
+
+    light.style.left =
+        Math.random() * 100 + "%";
+
+
+    light.style.animationDuration =
+        6 + Math.random() * 7 + "s";
+
+
+    light.style.animationDelay =
+        Math.random() * 5 + "s";
+
+
+    light.style.width =
+        3 + Math.random() * 7 + "px";
+
+
+    light.style.height =
+        light.style.width;
+
+
+    lights.appendChild(light);
+
+
+    setTimeout(
+        () => light.remove(),
+        15000
+    );
+
+}
+
+
+setInterval(
+    createLight,
+    500
+);
+
+
+
+/* =====================================================
+   PETALS
+===================================================== */
+
+const petals =
+    document.getElementById("petals");
+
+
+function createPetal(
+    container
+) {
+
+    const petal =
+        document.createElement("div");
+
+
+    petal.className = "petal";
+
+
+    const types = [
+        "🌸",
+        "🌷",
+        "♡",
+        "✦"
+    ];
+
+
+    petal.innerHTML =
+        types[
+            Math.floor(
+                Math.random() *
+                types.length
+            )
+        ];
+
+
+    petal.style.left =
+        Math.random() * 100 + "%";
+
+
+    petal.style.fontSize =
+        10 + Math.random() * 15 + "px";
+
+
+    petal.style.animationDuration =
+        6 + Math.random() * 7 + "s";
+
+
+    petal.style.animationDelay =
+        Math.random() * 5 + "s";
+
+
+    container.appendChild(petal);
+
+
+    setTimeout(
+        () => petal.remove(),
+        15000
+    );
+
+}
+
+
+setInterval(
+    () => createPetal(petals),
+    700
+);
+
+
+
+/* =====================================================
+   OPEN GIFT
+===================================================== */
+
+function openGift() {
+
+    const home =
+        document.getElementById(
+            "homePage"
+        );
+
+    const gift =
+        document.getElementById(
+            "giftPage"
+        );
+
+
+    home.style.display =
+        "none";
+
+
+    gift.style.display =
+        "flex";
+
+
+    window.scrollTo(
+        0,
+        0
+    );
+
+
+    /* Start music */
+
+    const music =
+        document.getElementById(
+            "bgMusic"
+        );
+
+
+    music.volume = 0.5;
+
+
+    music.play().catch(
+        () => {}
+    );
+
+}
+
+
+
+/* =====================================================
+   OPEN MESSAGE
+===================================================== */
+
+function openMessage() {
+
+    document.getElementById(
+        "giftPage"
+    ).style.display =
+        "none";
+
+
+    document.getElementById(
+        "messagePage"
+    ).style.display =
+        "flex";
+
+
+    window.scrollTo(
+        0,
+        0
+    );
+
+}
+
+
+
+/* =====================================================
+   BACK
+===================================================== */
+
+function goBack() {
+
+    document.getElementById(
+        "messagePage"
+    ).style.display =
+        "none";
+
+
+    document.getElementById(
+        "giftPage"
+    ).style.display =
+        "flex";
+
+}
+
+
+
+/* =====================================================
+   MUSIC
+===================================================== */
+
+function toggleMusic() {
+
+    const music =
+        document.getElementById(
+            "bgMusic"
+        );
+
+    const button =
+        document.getElementById(
+            "musicButton"
+        );
+
+
+    if (music.paused) {
+
+        music.play();
+
+        button.innerText = "♫";
+
+    } else {
+
+        music.pause();
+
+        button.innerText = "🔇";
+
     }
 
-    function showPage(index) {
-      pages.forEach((page, i) => {
-        page.classList.remove("active");
-        if (i === index) {
-          setTimeout(() => page.classList.add("active"), 50);
-        }
-      });
-    }
+}
 
-    function nextPage() {
-      currentPage = (currentPage + 1) % pages.length;
-      showPage(currentPage);
-    }
+</script>
 
-    function prevPage() {
-      currentPage = (currentPage - 1 + pages.length) % pages.length;
-      showPage(currentPage);
-    }
-
-    function startFlowers() {
-      const flowersContainer = document.getElementById("flowers");
-      setInterval(() => {
-        const flower = document.createElement("div");
-        flower.classList.add("flower");
-        flower.innerHTML = "🌸";
-        flower.style.left = Math.random() * 100 + "vw";
-        flower.style.animationDuration = 3 + Math.random() * 5 + "s";
-        flower.style.fontSize = 20 + Math.random() * 20 + "px";
-        flowersContainer.appendChild(flower);
-        setTimeout(() => { flower.remove(); }, 8000);
-      }, 700);
-    }
-
-    function startFlowersBg() {
-      const flowersBg = document.getElementById("flowersBg");
-      setInterval(() => {
-        const flower = document.createElement("div");
-        flower.classList.add("flower-bg");
-        flower.innerHTML = "💜";
-        flower.style.left = Math.random() * 100 + "vw";
-        flower.style.animationDuration = 4 + Math.random() * 6 + "s";
-        flower.style.fontSize = 25 + Math.random() * 25 + "px";
-        flowersBg.appendChild(flower);
-        setTimeout(() => { flower.remove(); }, 10000);
-      }, 900);
-    }
-  </script>
 </body>
 </html>
-
-
-
-
+```
